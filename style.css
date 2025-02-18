@@ -1,0 +1,205 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Sayfa düzeni */
+body {
+  background-color: #000;
+  /* Arka plan siyah */
+  color: #000;
+  /* Yazı rengi siyah (kutunun içinde beyaz zeminle kontrast) */
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  /* Sayfada merkezleme */
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Ortadaki kutu */
+.animated-box {
+  background-color: transparent;
+  border-radius: 12px;
+  padding: 40px 60px;
+  text-align: center;
+  opacity: 0;
+  animation: fadeInUp 2s ease forwards;
+}
+
+.animated-box img {
+  display: block;
+  margin: 0 auto;
+  max-width: 1400px;
+  /* İstediğiniz maksimum genişlik */
+  width: 50%;
+  height: auto;
+  pointer-events: none;
+  /* Tıklamaları devre dışı bırakır */
+  outline: none;
+  /* Focus/outline efektini kaldırır */
+  user-select: none;
+  /* Kullanıcının resmi seçmesini engeller */
+  -webkit-user-select: none;
+  /* Safari için */
+  -moz-user-select: none;
+  /* Firefox için */
+  -ms-user-select: none;
+  /* IE/Edge için */
+  -webkit-user-drag: none;
+  /* Resmin sürüklenmesini engeller */
+}
+
+/* Animasyon tanımı */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sağ alt köşedeki daireler */
+.linktree {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Her daire (link) */
+.linktree a {
+  position: relative;
+  /* Tooltip’in bu elemana göre konumlanması */
+  width: 70px;
+  height: 70px;
+  background-color: #333;
+  border-radius: 50%;
+  overflow: visible;
+  /* Tooltip daire dışına taşabilsin */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.5rem;
+  transition: background-color 0.3s ease;
+}
+
+/* Hoverda daire rengi değişsin */
+.linktree a:hover {
+  background-color: #555;
+}
+
+/* Logoyu daire içinde kırpmak için wrapper */
+.linktree a .icon-wrapper {
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  overflow: contain;
+  /* Resim taşarsa kesilsin */
+}
+
+/* Resmin daireye yerleşimi */
+.linktree a .icon-wrapper img {
+  display: block;
+  /* Boşlukları engellemek için block */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Resmi kırpmadan sığdır (kenarlarda boşluk olabilir) */
+  object-position: center;
+}
+
+/* Tooltip ayarları */
+.linktree a::before {
+  content: attr(data-tooltip);
+  /* data-tooltip içeriğini al */
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 8px);
+  /* Dairenin solunda 8px boşluk */
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  white-space: nowrap;
+  pointer-events: none;
+  /* Fareyle etkileşime girilmez */
+  opacity: 0;
+  /* Başlangıçta görünmez */
+  transition: opacity 0.2s ease;
+}
+
+/* Hover anında tooltip görünsün */
+.linktree a:hover::before {
+  opacity: 1;
+}
+
+/* Arka plan akış kapsayıcısı */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -2;
+}
+
+/* Satır stil ayarları */
+/* Her satırdaki yazı ayarları */
+.background .row {
+  white-space: nowrap;
+  /* Yazı tek satırda kalır */
+  font-size: 3em;
+  /* Yazı boyutu, isteğe bağlı ayarlayın */
+  color: rgba(255, 255, 255, 0.5);
+  /* Hafif opak beyaz, arka planda sade görünüm */
+  line-height: 1.3;
+  margin: 10px 0;
+  /* Satırlar arası boşluk */
+}
+
+/* Kayma animasyonları */
+@keyframes scrollLeft {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes scrollRight {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* Uygulanan animasyonlar */
+.scroll-left {
+  animation: scrollLeft 30s linear infinite;
+}
+
+.scroll-right {
+  animation: scrollRight 30s linear infinite;
+}
